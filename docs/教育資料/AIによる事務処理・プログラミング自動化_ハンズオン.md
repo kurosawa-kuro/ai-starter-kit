@@ -143,11 +143,11 @@ claude       # 例：Claude Code を起動
 
 ここから先（どのプロンプトを使うか、AIに何を頼むか、結果をどう活用するか）は、以下を参照してください。
 
-- **[`README.md`](./README.md)** — 入口、各ドキュメントへのリンク
-- **[`docs/05_運用.md`](./docs/05_運用.md)** — 利用者の作業フロー（git clone → setup → AI 起動 → 日常運用）
-- **[`docs/01_仕様と設計.md`](./docs/01_仕様と設計.md)** — このリポジトリの位置づけと設計上の決め事
-- **[`src/pg/README.md`](./src/pg/README.md)** — Python 学習タスク用のプロンプトメモ（コピペ前提）
-- **[`src/office-task/README.md`](./src/office-task/README.md)** — 事務処理タスク用のプロンプトメモ（コピペ前提）
+- **[`README.md`](../../README.md)** — 入口、各ドキュメントへのリンク
+- **[`docs/05_運用.md`](../05_運用.md)** — 利用者の作業フロー（git clone → setup → AI 起動 → 日常運用）
+- **[`docs/01_仕様と設計.md`](../01_仕様と設計.md)** — このリポジトリの位置づけと設計上の決め事
+- **[`src/pg/README.md`](../../src/pg/README.md)** — Python 学習タスク用のプロンプトメモ（コピペ前提）
+- **[`src/office-task/README.md`](../../src/office-task/README.md)** — 事務処理タスク用のプロンプトメモ（コピペ前提）
 
 > 💡 環境構築は **一度やればOK**。今後は新しい業務が増えたら ① の `git clone` を別のリポジトリに対して繰り返すだけで、すぐに運用に入れます。
 
