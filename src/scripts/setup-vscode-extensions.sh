@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# vscode-extensions.sh
+# setup-vscode-extensions.sh
 #   WSL 接続済みの VSCode に、本リポジトリの利用に推奨される拡張機能を
 #   一括導入するためのセットアップスクリプト。
 #
@@ -14,13 +14,13 @@
 #         - WSL リモート接続
 #         - Markdown 編集
 #         - Git 履歴可視化（GitLens）
-#         - Docker（docker.sh とセット）
+#         - Docker（setup-docker.sh とセット）
 #         - Jupyter（任意の学習用）
 #         - スペルチェッカ
 #     3. インストール後の拡張一覧を表示
 #
 #   使い方:
-#     bash vscode-extensions.sh
+#     bash setup-vscode-extensions.sh
 #
 #   再実行しても安全（`--force` で既導入なら更新、未導入なら新規導入）。
 

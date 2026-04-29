@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# claude-code.sh
+# setup-claude-code.sh
 #   WSL (Ubuntu) のクリーンインストール直後（Node.js 未導入）の状態から
 #   Claude Code を導入するためのセットアップスクリプト。
 #
@@ -11,7 +11,7 @@
 #     4. Claude Code (@anthropic-ai/claude-code) のグローバルインストール
 #
 #   使い方:
-#     bash claude-code.sh
+#     bash setup-claude-code.sh
 #
 #   再実行しても安全（既にインストール済みのものはスキップ／更新されます）。
 

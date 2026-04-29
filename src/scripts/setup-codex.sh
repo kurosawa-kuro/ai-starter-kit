@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# codex.sh
+# setup-codex.sh
 #   WSL (Ubuntu) のクリーンインストール直後（Node.js 未導入）の状態から
 #   OpenAI Codex CLI を導入するためのセットアップスクリプト。
 #
@@ -11,7 +11,7 @@
 #     4. Codex CLI (@openai/codex) のグローバルインストール
 #
 #   使い方:
-#     bash codex.sh
+#     bash setup-codex.sh
 #
 #   再実行しても安全（既にインストール済みのものはスキップ／更新されます）。
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# docker.sh
+# setup-docker.sh
 #   WSL (Ubuntu) のクリーンインストール直後の状態から
 #   Docker Engine と Docker Compose (plugin) を導入するためのセットアップスクリプト。
 #
@@ -16,7 +16,7 @@
 #     6. WSL2 で systemd を有効化 (/etc/wsl.conf)
 #
 #   使い方:
-#     bash docker.sh
+#     bash setup-docker.sh
 #
 #   実行後、Windows 側 PowerShell で `wsl --shutdown` を実行し、
 #   再度 WSL に入り直すと docker / docker compose が利用できるようになります。
