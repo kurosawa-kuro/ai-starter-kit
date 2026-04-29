@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - `setup-claude-code.sh`: nvm + Node.js LTS + `@anthropic-ai/claude-code`
   - `setup-codex.sh`: nvm + Node.js LTS + `@openai/codex`
   - `setup-docker.sh`: Docker Engine + Compose plugin（Docker Desktop 不使用、WSL 内 systemd 有効化込み）
-  - `setup-vscode-extensions.sh`: VSCode 推奨拡張（日本語化 / Python / Markdown / GitLens / Docker / Jupyter ほか）の一括導入
+  - `setup-vscode-extensions.sh`: VSCode 推奨拡張（日本語化 / Python / Markdown / GitLens / Docker / Jupyter / DBCode / Rainbow CSV ほか）の一括導入
 - `src/pg/` — Python プログラミング学習タスクのプロンプトメモ + サンプルデータ（`README.md` にプロンプトを保管）
 - `src/office-task/` — 事務処理タスクのプロンプトメモ + サンプルデータ（同上）
 - `docs/01_仕様と設計.md` 〜 `05_運用.md` — 仕様 / backlog / 実体目録 / 動作確認 / 利用者フロー。権威順位と更新ルールは `docs/README.md` 参照

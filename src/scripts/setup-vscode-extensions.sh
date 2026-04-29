@@ -86,6 +86,12 @@ EXTENSIONS=(
   # Jupyter（Python 学習者向け）
   "ms-toolsai.jupyter"
 
+  # DBCode（DB クライアント。SQLite / MySQL / PostgreSQL 等の閲覧・編集を VSCode 内で完結）
+  "DBCode.dbcode"
+
+  # Rainbow CSV（CSV / TSV を列ごとに色分け表示。src/office-task/data/ の CSV 確認に有用）
+  "mechatroner.rainbow-csv"
+
   # スペルチェッカ（英語・日本語の typo 抑止）
   "streetsidesoftware.code-spell-checker"
 )

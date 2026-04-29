@@ -482,7 +482,7 @@ sudo apt install -y python3
 | `setup-python.sh` | Python 3 + 開発用 apt パッケージ（`python3-pip` / `python3-venv` / `build-essential` ほか） | 必須 |
 | `setup-claude-code.sh` | nvm + Node.js LTS + Claude Code (`@anthropic-ai/claude-code`) | 必須 |
 | `setup-codex.sh` | nvm + Node.js LTS + Codex CLI (`@openai/codex`) | 任意（併用したい場合） |
-| `setup-vscode-extensions.sh` | VSCode 推奨拡張一括導入（日本語化 / Python / Markdown / GitLens / Docker / Jupyter / DBCode / Rainbow CSV 等） | 任意（推奨） |
+| `setup-vscode-extensions.sh` | VSCode 推奨拡張一括導入（日本語化 / Python / Markdown / GitLens / Docker / Jupyter / DBCode 等） | 任意（推奨） |
 | `setup-docker.sh` | Docker Engine + Compose plugin（Docker Desktop 不使用） | 任意（Docker を使う場合のみ） |
 
 同梱されているのは **シェル + プロンプトメモ（`src/pg/README.md` / `src/office-task/README.md`） + サンプルデータ** です。「設計済みコード」は同梱されていません — 実装は AI ツールに依頼して都度生成する設計です。
