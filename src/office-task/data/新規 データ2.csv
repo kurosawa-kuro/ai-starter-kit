@@ -1,0 +1,11 @@
+employee_id,name,department,email,hire_date,status
+1001,山田太郎,エンジニアリング,yamada@example.com,2022-04-01,active
+1002,佐藤花子,人事,sato@example.com,2021-07-15,active
+1003,鈴木一郎,営業,suzuki@example.com,2020-10-01,inactive
+1004,高橋美咲,マーケティング,takahashi@example.com,2023-01-20,active
+1005,伊藤健,エンジニアリング,ito@example.com,2019-04-01,active
+1006,渡辺彩,経理,watanabe@example.com,2022-09-10,active
+1007,中村優,営業,nakamura@example.com,2021-12-01,active
+1008,小林翔,エンジニアリング,kobayashi@example.com,2023-06-01,active
+1009,加藤真由美,カスタマーサポート,kato@example.com,2020-03-15,inactive
+1010,吉田直樹,経営企画,yoshida@example.com,2018-11-01,active
