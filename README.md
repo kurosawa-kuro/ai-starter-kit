@@ -34,12 +34,15 @@ WSL / VSCode / Git を Windows 上に手動でセットアップする。
 最短実行の例:
 
 ```bash
-cd ~
+# 作業フォルダ ~/dev/ を作って、その下に clone する規約
+mkdir -p ~/dev && cd ~/dev
+
 # HTTPS（推奨。SSH 鍵設定不要）
 git clone https://github.com/kurosawa-kuro/ai-starter-kit.git
 # もしくは SSH（鍵設定済みの場合）
 # git clone git@github.com:kurosawa-kuro/ai-starter-kit.git
-cd ai-starter-kit
+
+cd ai-starter-kit                       # → ~/dev/ai-starter-kit/
 
 bash src/scripts/setup-python.sh        # Python 3
 bash src/scripts/setup-claude-code.sh   # Claude Code CLI
