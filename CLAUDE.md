@@ -10,8 +10,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## ディレクトリ構成（実体）
 
-- `docs/教育資料/01_環境構築ガイド.md` — 非エンジニア向けの WSL + VSCode + Git 導入手順書（Phase 1: git clone 直前まで）
-- `docs/教育資料/02_ハンズオン.md` — git clone 後の `setup-*.sh` 実行と AI ツール起動までのハンズオン手順書（Phase 2）
+- `docs/教育資料/00_クイックスタート.md` — **15 分で AI を動かす最短ルート**（初心者の入口・Phase 1+2 を最小構成で）
+- `docs/教育資料/01_環境構築ガイド.md` — 非エンジニア向けの WSL + VSCode + Git 導入手順書（Phase 1: git clone 直前まで・詳細版）
+- `docs/教育資料/02_ハンズオン.md` — git clone 後の `setup-*.sh` 実行と AI ツール起動までのハンズオン手順書（Phase 2・詳細版）
 - `docs/教育資料/03_WSL操作.md` — WSL 日常操作リファレンス（起動／停止／ファイルコピー／Reveal in Explorer ほか）
 - `src/scripts/*.sh` — WSL Ubuntu 上で AI ツール環境を整える **冪等なセットアップシェル**（命名規則 `setup-*.sh`）
   - `setup-python.sh`: Python 3 + 開発用 apt パッケージ
