@@ -43,8 +43,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - フォーマットは `## プロンプトN: <概要>` 見出し + `- **項目名**: 内容` 箇条書き
 - `src/pg/` のプロンプトは以下を前提として明記する：
   - 言語: Python 3
-  - **Python 3 は `/home/ubuntu/repos/ai-starter-kit/src/scripts/setup-python.sh` で事前インストール済み**
-  - 仮想環境（uv / venv 等）は **使わない**。学習者がプログラム本体に集中できるようにする意図的な選択
+  - **Python 3 は本リポジトリの `src/scripts/setup-python.sh` で事前インストール済み**
+  - 仮想環境（uv / venv 等）は **使わない**（学習者がプログラム本体に集中できるようにするための意図的な選択。`setup-python.sh` も `python3-venv` を非導入。追加パッケージは `pip install --user` で入れる）
   - 回答は日本語、必要に応じて環境構築・起動方法も日本語で案内
 - `src/office-task/` のプロンプトでファイル操作を扱う場合、**元ファイルは絶対に変更・移動・削除しない**。コピーして新しい名前を付けて同ディレクトリに保存する方式が既定
 

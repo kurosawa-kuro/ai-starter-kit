@@ -441,7 +441,7 @@ ls
 ## ⑥ Python（WSL内）の存在確認 【必須】
 
 > 📌 **このガイドでは Python は「存在確認」のみ行います。**
-> Python 3 本体および開発用 apt パッケージ（`python3-pip` / `python3-venv` / `build-essential` 等）の追加導入は、**ハンズオン側で `git clone` するリポジトリ同梱の `src/scripts/setup-python.sh`** が自動で実施します（このリポジトリの学習タスクでは仮想環境（venv／uv 等）は意図的に使いません）。
+> Python 3 本体および開発用 apt パッケージ（`python3-pip` / `python3-dev` / `build-essential` 等）の追加導入は、**ハンズオン側で `git clone` するリポジトリ同梱の `src/scripts/setup-python.sh`** が自動で実施します。本リポジトリでは仮想環境（venv／uv 等）を意図的に使わない方針のため、`python3-venv` は導入されません。
 
 WSLに接続した状態のVSCodeターミナルで実行します。
 

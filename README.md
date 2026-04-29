@@ -1,4 +1,4 @@
-# AI スターターキット
+# AI スターターキット — AIによる事務処理・プログラミング自動化
 
 Windows ユーザー（特に非 IT エンジニア）が **WSL + VSCode + AI コーディングツール（Claude Code / Codex CLI）** を使って **事務処理の自動化** と **プログラミング学習・自動化** に取り組むための、環境構築シェル + プロンプトメモ + サンプルデータの一式。
 
@@ -35,7 +35,10 @@ WSL / VSCode / Git を Windows 上に手動でセットアップする。
 
 ```bash
 cd ~
-git clone <配布元から指定された URL> ai-starter-kit
+# HTTPS（推奨。SSH 鍵設定不要）
+git clone https://github.com/kurosawa-kuro/ai-starter-kit.git
+# もしくは SSH（鍵設定済みの場合）
+# git clone git@github.com:kurosawa-kuro/ai-starter-kit.git
 cd ai-starter-kit
 
 bash src/scripts/setup-python.sh        # Python 3
@@ -88,7 +91,7 @@ ai-starter-kit/
 
 ## 設計上の前提（要点）
 
-- 仮想環境（`venv` / `uv` 等）は `src/pg/` の学習タスクでは **使わない**（学習者がプログラム本体に集中するための意図的な選択）
+- 仮想環境（`venv` / `uv` 等）は **本キット全体で使わない**（`setup-python.sh` も `python3-venv` を非導入）。追加パッケージは `pip install --user` で入れる運用
 - `src/office-task/` のファイル操作タスクでは **元ファイルは変更・移動・削除しない**（コピーを作って新しい名前で同じ場所に保存する）
 - プロンプトメモ（`src/{pg,office-task}/README.md`）は **共通項目を上部に DRY 化せず**、各セクションを自己完結させる（利用者が単独でコピペ可能にする）
 - ドキュメント・シェル出力・コミットメッセージはすべて **日本語**

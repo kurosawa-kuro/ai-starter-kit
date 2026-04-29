@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 #
-# python.sh
+# setup-python.sh
 #   WSL (Ubuntu) のクリーンインストール直後の状態から
 #   Python 3 開発環境を導入するためのセットアップスクリプト。
+#
+#   ⚠️ 設計方針:
+#     本スターターキットでは **仮想環境（venv / uv 等）を使いません**。
+#     学習者がプログラム本体に集中できるようにするための意図的な選択です
+#     （`docs/01_仕様と設計.md §5.1` 参照）。
+#     そのため `python3-venv` 等の venv 系パッケージは導入しません。
 #
 #   実行内容:
 #     1. apt パッケージリストの更新
 #     2. Python 3 本体および開発に必要な周辺パッケージの導入
 #         - python3            : Python 本体
 #         - python3-pip        : パッケージマネージャ pip
-#         - python3-venv       : 仮想環境 (venv) 作成用
 #         - python3-dev        : C 拡張モジュールのビルドに必要なヘッダ
 #         - build-essential    : gcc / make 等のビルドツール一式
 #         - ca-certificates    : HTTPS 通信用ルート証明書
@@ -18,7 +23,7 @@
 #     4. 動作確認の表示
 #
 #   使い方:
-#     bash python.sh
+#     bash setup-python.sh
 #
 #   再実行しても安全（既にインストール済みのものはスキップされます）。
 
@@ -49,7 +54,7 @@ apt_update() {
 }
 
 install_python() {
-  log "Python 3 と関連パッケージを導入します。"
+  log "Python 3 と関連パッケージを導入します（venv は使わない方針のため非導入）。"
   sudo apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
@@ -57,17 +62,18 @@ install_python() {
     build-essential \
     python3 \
     python3-pip \
-    python3-venv \
     python3-dev
 }
 
 upgrade_pip() {
   # Ubuntu 23.04+ では PEP 668 により system Python への pip install が
-  # 制限されているため、--user で pip 自体を更新する。
+  # 制限されているため、--user でユーザー領域に更新する。
+  # 本スターターキットでは venv を使わないため、追加パッケージが必要に
+  # なった場合も `pip install --user <pkg>` で導入する運用を想定。
   if command -v python3 >/dev/null 2>&1; then
     log "pip をユーザー領域で最新化します。"
     python3 -m pip install --user --upgrade pip || \
-      warn "pip のアップグレードに失敗しました（システム制限の可能性あり）。venv 内であれば通常通り更新できます。"
+      warn "pip のアップグレードに失敗しました（PEP 668 制約の可能性）。"
   fi
 }
 
@@ -75,7 +81,6 @@ verify() {
   log "インストール結果を確認します。"
   python3 --version || true
   python3 -m pip --version || true
-  python3 -m venv --help >/dev/null 2>&1 && log "python3-venv 利用可能" || warn "python3-venv が利用できません。"
 }
 
 print_next_steps() {
@@ -91,23 +96,23 @@ print_next_steps() {
        python3 --version
        python3 -m pip --version
 
- 2. プロジェクト用の仮想環境 (venv) を作成して使う:
+ 2. AI ツール（Claude Code 等）に Python ファイルを書いてもらい、
+    そのまま実行する:
 
-       cd ~/your-project
-       python3 -m venv .venv
-       source .venv/bin/activate
-       pip install --upgrade pip
-       pip install -r requirements.txt   # 依存パッケージがある場合
+       python3 your_script.py
 
-       deactivate                        # 仮想環境を抜ける
+ 3. 追加パッケージが必要になったら（例: pandas）:
 
- 3. （任意）python コマンドでも呼び出せるようにする:
+       pip install --user pandas
+
+    ※ 本スターターキットは **仮想環境（venv / uv 等）を使わない方針** です。
+       学習者がプログラム本体に集中できるようにするためで、`pip install`
+       は `--user` でユーザー領域に入れる運用を想定しています。
+       詳細は docs/01_仕様と設計.md §5.1 を参照。
+
+ 4. （任意）python コマンドでも呼び出せるようにする:
 
        sudo apt-get install -y python-is-python3
-
- ※ Ubuntu 23.04 以降では PEP 668 により、システム全体の Python へ
-    `pip install` で直接パッケージを入れることが制限されています。
-    プロジェクトごとに venv を使うのが推奨されます。
 
 ============================================================
 EOF

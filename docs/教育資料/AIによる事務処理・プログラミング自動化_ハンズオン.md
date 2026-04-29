@@ -49,7 +49,7 @@ python3 --version   # → Python 3.x.x
 
 | シェル | 役割 | 必須／任意 |
 |---|---|---|
-| `setup-python.sh` | Python 3 + 開発用 apt パッケージ（`python3-pip` / `python3-venv` / `build-essential` ほか） | 必須 |
+| `setup-python.sh` | Python 3 + 開発用 apt パッケージ（`python3-pip` / `python3-dev` / `build-essential` ほか。venv は使わない方針のため `python3-venv` は非導入） | 必須 |
 | `setup-claude-code.sh` | nvm + Node.js LTS + Claude Code (`@anthropic-ai/claude-code`) | 必須 |
 | `setup-codex.sh` | nvm + Node.js LTS + Codex CLI (`@openai/codex`) | 任意（併用したい場合） |
 | `setup-vscode-extensions.sh` | VSCode 推奨拡張一括導入（日本語化 / Python / Markdown / GitLens / Docker / Jupyter / DBCode / Rainbow CSV 等） | 任意（推奨） |
@@ -75,10 +75,14 @@ cd ~
 ### ② リポジトリを clone
 
 ```bash
-git clone <配布元から教えてもらったURL>
+# HTTPS（推奨。SSH 鍵を設定していなくても使える）
+git clone https://github.com/kurosawa-kuro/ai-starter-kit.git
+
+# もしくは SSH（鍵を登録済みの場合）
+# git clone git@github.com:kurosawa-kuro/ai-starter-kit.git
 ```
 
-   - 例：`git clone https://github.com/your-org/ai-starter-kit.git`
+   - 公開リポジトリ（パブリック）なので、HTTPS であれば認証なしで clone できます
    - プライベートリポジトリの場合はユーザー名とトークンを求められることがあります（後述のトラブルシューティング参照）
 
 ### ③ clone したプロジェクトに移動
