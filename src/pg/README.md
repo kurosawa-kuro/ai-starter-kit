@@ -4,7 +4,7 @@
 
 - **依頼内容**: 偶数判定を行うコマンドラインプログラムを作成
 - **言語**: Python 3
-- **前提**: Python 3 は事前に `/home/ubuntu/repos/ai-starter-kit/src/scripts/python.sh` でインストール済みであること
+- **前提**: Python 3 は事前に `/home/ubuntu/repos/ai-starter-kit/src/scripts/setup-python.sh` でインストール済みであること
 - **回答**: 日本語で、日本人にわかりやすい説明
 - **手順説明**: 必要に応じて環境構築・起動方法を案内
 - **仮想環境**: 不要（uv 等は使わない。学習者がプログラム自体に集中できるようにするため）
@@ -15,7 +15,7 @@
 
 - **依頼内容**: 偶数判定を行う Web アプリを作成
 - **言語**: Python 3
-- **前提**: Python 3 は事前に `/home/ubuntu/repos/ai-starter-kit/src/scripts/python.sh` でインストール済みであること
+- **前提**: Python 3 は事前に `/home/ubuntu/repos/ai-starter-kit/src/scripts/setup-python.sh` でインストール済みであること
 - **使用技術**: FastAPI + Jinja
 - **UI**: 日本語で、日本人にわかりやすい表記
 - **手順説明**: 必要に応じて環境構築・起動方法を案内

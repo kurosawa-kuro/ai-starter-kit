@@ -1,0 +1,161 @@
+#!/usr/bin/env bash
+#
+# vscode-extensions.sh
+#   WSL 接続済みの VSCode に、本リポジトリの利用に推奨される拡張機能を
+#   一括導入するためのセットアップスクリプト。
+#
+#   実行内容:
+#     1. `code` コマンドが PATH にあるかチェック
+#        （WSL ターミナル内で `code` が叩ければ、VSCode WSL 側の
+#         サーバへ拡張がインストールされる）
+#     2. 推奨拡張を `code --install-extension --force` で順次導入
+#         - 日本語化
+#         - Python（本体 + Pylance + デバッガ）
+#         - WSL リモート接続
+#         - Markdown 編集
+#         - Git 履歴可視化（GitLens）
+#         - Docker（docker.sh とセット）
+#         - Jupyter（任意の学習用）
+#         - スペルチェッカ
+#     3. インストール後の拡張一覧を表示
+#
+#   使い方:
+#     bash vscode-extensions.sh
+#
+#   再実行しても安全（`--force` で既導入なら更新、未導入なら新規導入）。
+
+set -euo pipefail
+
+log()  { printf '\n\033[1;34m[INFO]\033[0m  %s\n' "$*"; }
+warn() { printf '\n\033[1;33m[WARN]\033[0m  %s\n' "$*"; }
+err()  { printf '\n\033[1;31m[ERROR]\033[0m %s\n' "$*" >&2; }
+
+require_linux() {
+  if [[ "$(uname -s)" != "Linux" ]]; then
+    err "このスクリプトは Linux (WSL の Ubuntu 等) 上で実行してください。"
+    exit 1
+  fi
+}
+
+require_non_root() {
+  if [[ "$(id -u)" -eq 0 ]]; then
+    err "root ユーザーでの実行は推奨されません。一般ユーザーで実行してください。"
+    exit 1
+  fi
+}
+
+require_code_cli() {
+  if ! command -v code >/dev/null 2>&1; then
+    err "'code' コマンドが見つかりません。"
+    err ""
+    err "次のいずれかを確認してください:"
+    err "  1. Windows 側で VSCode をインストール済みであること"
+    err "  2. VSCode に 'WSL' 拡張機能が入っていて、現在 WSL に接続している状態でターミナルを開いていること"
+    err "  3. もしくは Windows のインストール時に 'PATHへの追加' を有効化したこと"
+    err ""
+    err "VSCode から WSL に接続したターミナルを開けば、通常 'code' コマンドが利用可能になります。"
+    exit 1
+  fi
+  log "'code' コマンドを検出: $(command -v code)"
+}
+
+# 推奨拡張の一覧
+# - 入門者・本リポジトリでの作業に必要十分なものに絞っている
+# - 並びは「カテゴリ → 効用」の順
+EXTENSIONS=(
+  # 日本語化
+  "MS-CEINTL.vscode-language-pack-ja"
+
+  # Python（CLI / Web / 学習）
+  "ms-python.python"
+  "ms-python.vscode-pylance"
+  "ms-python.debugpy"
+
+  # WSL リモート接続（既に入っている前提だが、念のため明示）
+  "ms-vscode-remote.remote-wsl"
+
+  # Markdown 編集（プロンプトメモ・ドキュメント編集に必須）
+  "yzhang.markdown-all-in-one"
+
+  # Git 履歴可視化
+  "eamodio.gitlens"
+
+  # Docker（docker.sh を使う場合）
+  "ms-azuretools.vscode-docker"
+
+  # Jupyter（Python 学習者向け）
+  "ms-toolsai.jupyter"
+
+  # スペルチェッカ（英語・日本語の typo 抑止）
+  "streetsidesoftware.code-spell-checker"
+)
+
+install_extensions() {
+  local total="${#EXTENSIONS[@]}"
+  local i=0
+  local failed=()
+
+  log "VSCode 拡張機能を ${total} 個導入します。"
+
+  for ext in "${EXTENSIONS[@]}"; do
+    i=$((i + 1))
+    printf '  [%2d/%2d] %s ... ' "$i" "$total" "$ext"
+    if code --install-extension "$ext" --force >/dev/null 2>&1; then
+      printf '\033[1;32mOK\033[0m\n'
+    else
+      printf '\033[1;31mFAILED\033[0m\n'
+      failed+=("$ext")
+    fi
+  done
+
+  if (( ${#failed[@]} > 0 )); then
+    warn "以下の拡張のインストールに失敗しました:"
+    for f in "${failed[@]}"; do
+      printf '   - %s\n' "$f"
+    done
+    warn "ネットワーク接続や Marketplace の状態を確認のうえ、再実行してください。"
+  fi
+}
+
+list_installed() {
+  log "現在インストール済みの拡張機能:"
+  code --list-extensions | sed 's/^/   - /'
+}
+
+print_next_steps() {
+  cat <<'EOF'
+
+============================================================
+ VSCode 拡張機能のセットアップが完了しました 🧩
+============================================================
+
+【次にやること】
+
+ 1. VSCode を一度再読み込み（ウィンドウを閉じて開き直す、または
+    コマンドパレット (Ctrl+Shift+P) → "Developer: Reload Window"）
+    して、新しい拡張を有効化してください。
+
+ 2. 日本語化が反映されない場合:
+    コマンドパレット → "Configure Display Language" → "ja" を選択
+    して再読み込み。
+
+ 3. Python 拡張が初回起動時にインタプリタの選択を求めてきたら、
+    `/usr/bin/python3` （`python.sh` で導入したもの）を選んでください。
+
+ 4. 拡張を後から追加・削除したい場合は左サイドバーの
+    「拡張機能」アイコンから個別に操作できます。
+
+============================================================
+EOF
+}
+
+main() {
+  require_linux
+  require_non_root
+  require_code_cli
+  install_extensions
+  list_installed
+  print_next_steps
+}
+
+main "$@"

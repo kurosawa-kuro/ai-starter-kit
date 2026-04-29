@@ -11,15 +11,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## ディレクトリ構成（実体）
 
 - `AIによる事務処理・プログラミング自動化_環境構築ガイド.md` — 非エンジニア向けの WSL + VSCode + Git 導入手順書（一次情報）
-- `src/scripts/*.sh` — WSL Ubuntu 上で AI ツール環境を整える **冪等なセットアップシェル**
-  - `python.sh`: Python 3 + 開発用 apt パッケージ
-  - `claude-code.sh`: nvm + Node.js LTS + `@anthropic-ai/claude-code`
-  - `codex.sh`: nvm + Node.js LTS + `@openai/codex`
-  - `docker.sh`: Docker Engine + Compose plugin（Docker Desktop 不使用、WSL 内 systemd 有効化込み）
+- `src/scripts/*.sh` — WSL Ubuntu 上で AI ツール環境を整える **冪等なセットアップシェル**（命名規則 `setup-*.sh`）
+  - `setup-python.sh`: Python 3 + 開発用 apt パッケージ
+  - `setup-claude-code.sh`: nvm + Node.js LTS + `@anthropic-ai/claude-code`
+  - `setup-codex.sh`: nvm + Node.js LTS + `@openai/codex`
+  - `setup-docker.sh`: Docker Engine + Compose plugin（Docker Desktop 不使用、WSL 内 systemd 有効化込み）
+  - `setup-vscode-extensions.sh`: VSCode 推奨拡張（日本語化 / Python / Markdown / GitLens / Docker / Jupyter ほか）の一括導入
 - `src/pg/` — Python プログラミング学習タスクのプロンプトメモ + サンプルデータ（`README.md` にプロンプトを保管）
 - `src/office-task/` — 事務処理タスクのプロンプトメモ + サンプルデータ（同上）
-
-> ⚠️ `docs/` 配下（`01_仕様と設計.md` 〜 `05_運用.md`）は **別プロジェクト（GCP/MLOps 系）の流用テンプレートが残っているだけ** で、本リポジトリの実態（`app/` `ml/` `pipeline/` `infra/terraform/` 等は存在しない）と一致していない。本リポジトリの仕様としては参照しないこと。修正・削除・整合化を依頼された場合のみ触る。
+- `docs/01_仕様と設計.md` 〜 `05_運用.md` — 仕様 / backlog / 実体目録 / 動作確認 / 利用者フロー。権威順位と更新ルールは `docs/README.md` 参照
 
 ## セットアップシェルの設計ルール（変更時の遵守事項）
 
@@ -31,7 +31,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **冪等性**: 既にインストール済みなら検出してスキップ。再実行で壊れないこと
 - 完了時に `print_next_steps` で日本語の次手順を表示
 - apt 系は `--no-install-recommends` を付ける
-- Node.js 系（`claude-code.sh` / `codex.sh`）は **nvm 経由**で導入し、グローバル npm install で CLI を入れる構成を踏襲
+- Node.js 系（`setup-claude-code.sh` / `setup-codex.sh`）は **nvm 経由**で導入し、グローバル npm install で CLI を入れる構成を踏襲
+- 新規シェルは `setup-<対象>.sh` の命名で揃える
 
 ## プロンプトメモ（`src/*/README.md`）の編集ルール
 
@@ -41,7 +42,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - フォーマットは `## プロンプトN: <概要>` 見出し + `- **項目名**: 内容` 箇条書き
 - `src/pg/` のプロンプトは以下を前提として明記する：
   - 言語: Python 3
-  - **Python 3 は `/home/ubuntu/repos/ai-starter-kit/src/scripts/python.sh` で事前インストール済み**
+  - **Python 3 は `/home/ubuntu/repos/ai-starter-kit/src/scripts/setup-python.sh` で事前インストール済み**
   - 仮想環境（uv / venv 等）は **使わない**。学習者がプログラム本体に集中できるようにする意図的な選択
   - 回答は日本語、必要に応じて環境構築・起動方法も日本語で案内
 - `src/office-task/` のプロンプトでファイル操作を扱う場合、**元ファイルは絶対に変更・移動・削除しない**。コピーして新しい名前を付けて同ディレクトリに保存する方式が既定
